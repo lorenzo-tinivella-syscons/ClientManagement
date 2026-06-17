@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_zeiCkGokEfGJ2vSDNhgoTw" targetNamespace="http://tns.tibco.com/bw/composite/ClientManagement.module" name="ClientManagement.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_iDMiZGpLEfGJ2vSDNhgoTw" name="clients" promote="ComponentClientManagementREST/clients">
+    <sca:interface.wsdl xmi:id="_iDMiaGpLEfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_iDh5kGpLEfGJ2vSDNhgoTw" name="RestService" path="/clients" docBasePath="http://localhost:7777/ClientManagement.module" docResourcePath="ClientManagementREST" basePath="/" connector="clientmanagement.module.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json">
+      <operation xmi:id="_iDqccGpLEfGJ2vSDNhgoTw" operationName="post" nickname="post-clients" httpMethod="POST" notes="postClientManagementREST" responseStyle="array" requestStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <advancedConfig xmi:id="_iDh5kWpLEfGJ2vSDNhgoTw" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_iDqccWpLEfGJ2vSDNhgoTw" bindingName="RestService"/>
+  </sca:service>
+  <sca:service xmi:id="_KN7usmpREfGJ2vSDNhgoTw" name="clients1" promote="ComponentClientManagementREST/clients1">
+    <sca:interface.wsdl xmi:id="_KN7utmpREfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients1)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_KOAnMGpREfGJ2vSDNhgoTw" name="RestService1" path="/clients/{clientId}" docBasePath="http://localhost:7777/ClientManagement.module" docResourcePath="ClientManagementREST" basePath="/" connector="clientmanagement.module.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json">
+      <operation xmi:id="_KOB1UGpREfGJ2vSDNhgoTw" operationName="get" nickname="get-clients" httpMethod="GET" notes="getClientManagementREST" responseStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_KOB1UWpREfGJ2vSDNhgoTw" operationName="put" nickname="put-clients" httpMethod="PUT" notes="putClientManagementREST" responseStyle="element" requestStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_KOB1UmpREfGJ2vSDNhgoTw" operationName="delete" nickname="delete-clients" httpMethod="DELETE" notes="deleteClientManagementREST" responseStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_KOVXUGpREfGJ2vSDNhgoTw">
+        <parameterMapping xmi:id="_KOVXUWpREfGJ2vSDNhgoTw" parameterName="clientId" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_KOAnMWpREfGJ2vSDNhgoTw" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_KOB1U2pREfGJ2vSDNhgoTw" bindingName="RestService1"/>
+  </sca:service>
+  <sca:property xmi:id="_0_s6YGokEfGJ2vSDNhgoTw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0_2EUGokEfGJ2vSDNhgoTw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0_2EUWokEfGJ2vSDNhgoTw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0_2EUmokEfGJ2vSDNhgoTw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0__1UGokEfGJ2vSDNhgoTw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0__1UWokEfGJ2vSDNhgoTw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_1AF78GokEfGJ2vSDNhgoTw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_1AIYMGokEfGJ2vSDNhgoTw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_1AK0cGokEfGJ2vSDNhgoTw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BrBgAGoxEfGJ2vSDNhgoTw" name="Property" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_DJzLIGoxEfGJ2vSDNhgoTw" name="Property1" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_IYA8cGoxEfGJ2vSDNhgoTw" name="Property11" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_iDMiYGpLEfGJ2vSDNhgoTw" name="ComponentClientManagementREST" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_iDMiYWpLEfGJ2vSDNhgoTw" processName="clientmanagement.module.ClientManagementREST"/>
+    <sca:service xmi:id="_iDMiYmpLEfGJ2vSDNhgoTw" name="clients">
+      <sca:interface.wsdl xmi:id="_iDMiY2pLEfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
+    </sca:service>
+    <sca:service xmi:id="_KN7usGpREfGJ2vSDNhgoTw" name="clients1">
+      <sca:interface.wsdl xmi:id="_KN7usWpREfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients1)"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

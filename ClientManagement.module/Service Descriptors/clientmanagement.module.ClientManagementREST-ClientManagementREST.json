@@ -1,0 +1,198 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "ClientManagementREST",
+    "description" : "ClientManagementREST service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/clients/{clientId}" : {
+      "get" : {
+        "summary" : "getClientManagementREST",
+        "description" : "getClientManagementREST",
+        "operationId" : "get-clients",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "clientId",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a GetClientDetailsResponse to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/GetClientDetailsResponse"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "putClientManagementREST",
+        "description" : "putClientManagementREST",
+        "operationId" : "put-clients",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/UpdateClientRequest"
+          },
+          "required" : true
+        }, {
+          "name" : "clientId",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a UpdateClientResponse to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/UpdateClientResponse"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deleteClientManagementREST",
+        "description" : "deleteClientManagementREST",
+        "operationId" : "delete-clients",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "clientId",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a RemoveClientResponse to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/RemoveClientResponse"
+            }
+          }
+        }
+      }
+    },
+    "/clients" : {
+      "post" : {
+        "summary" : "postClientManagementREST",
+        "description" : "postClientManagementREST",
+        "operationId" : "post-clients",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/RegisterClientRequest"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a RegisterClientResponse to be returned",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/RegisterClientResponse",
+                "uniqueItems" : false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "RegisterClientResponse" : {
+      "type" : "object",
+      "required" : [ "ClientId" ],
+      "properties" : {
+        "ClientId" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "RegisterClientRequest" : {
+      "type" : "object",
+      "required" : [ "Email", "PhoneNumber", "Name" ],
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Email" : {
+          "type" : "string"
+        },
+        "PhoneNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateClientResponse" : {
+      "type" : "object",
+      "required" : [ "Result" ],
+      "properties" : {
+        "Result" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "UpdateClientRequest" : {
+      "type" : "object",
+      "required" : [ "Email", "ClientId", "PhoneNumber", "Name" ],
+      "properties" : {
+        "ClientId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "Name" : {
+          "type" : "string"
+        },
+        "Email" : {
+          "type" : "string"
+        },
+        "PhoneNumber" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RemoveClientResponse" : {
+      "type" : "object",
+      "required" : [ "Result" ],
+      "properties" : {
+        "Result" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "GetClientDetailsResponse" : {
+      "type" : "object",
+      "required" : [ "Email", "PhoneNumber", "Name" ],
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Email" : {
+          "type" : "string"
+        },
+        "PhoneNumber" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

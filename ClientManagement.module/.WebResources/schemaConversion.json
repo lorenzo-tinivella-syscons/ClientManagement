@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/ClientManagement.module/Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.org/Client"
+}]}

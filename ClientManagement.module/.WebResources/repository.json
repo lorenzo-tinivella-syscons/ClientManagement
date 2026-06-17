@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json",
+        "type": "generated"
+    }]
+}
