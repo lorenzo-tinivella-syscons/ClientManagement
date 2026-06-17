@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.tibco.com/ClientManagementDescriptor/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ClientManagementDescriptor" targetNamespace="http://www.tibco.com/ClientManagementDescriptor/" xmlns:ns="http://www.example.org/Client">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.example.org/Client" schemaLocation="../Schemas/Client.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ClientFault">
+    <wsdl:part element="ns:ClientFault" name="fault"/>
+  </wsdl:message>
+  <wsdl:message name="RegisterClientRequest">
+    <wsdl:part element="ns:RegisterClientRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="RegisterClientResponse">
+    <wsdl:part element="ns:RegisterClientResponse" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetClientDetailsRequest">
+    <wsdl:part element="ns:GetClientDetailsRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetClientDetailsResponse">
+    <wsdl:part element="ns:GetClientDetailsResponse" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="UpdateClientRequest">
+    <wsdl:part element="ns:UpdateClientRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateClientResponse">
+    <wsdl:part element="ns:UpdateClientResponse" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="RemoveClientRequest">
+    <wsdl:part element="ns:RemoveClientRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="RemoveClientResponse">
+    <wsdl:part element="ns:RemoveClientResponse" name="parameters"/>
+  </wsdl:message>
+
+
+  <wsdl:portType name="ClientManagementPortType">
+    
+    <wsdl:operation name="RegisterClient">
+      <wsdl:input message="tns:RegisterClientRequest"/>
+      <wsdl:output message="tns:RegisterClientResponse"/>
+      <wsdl:fault name="fault" message="tns:ClientFault"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetClientDetails">
+      <wsdl:input message="tns:GetClientDetailsRequest"/>
+      <wsdl:output message="tns:GetClientDetailsResponse"/>
+      <wsdl:fault name="fault" message="tns:ClientFault"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="UpdateClient">
+      <wsdl:input message="tns:UpdateClientRequest"/>
+      <wsdl:output message="tns:UpdateClientResponse"/>
+      <wsdl:fault name="fault" message="tns:ClientFault"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="RemoveClient">
+      <wsdl:input message="tns:RemoveClientRequest"/>
+      <wsdl:output message="tns:RemoveClientResponse"/>
+      <wsdl:fault name="fault" message="tns:ClientFault"/>
+    </wsdl:operation>
+    
+  </wsdl:portType>
+</wsdl:definitions>
