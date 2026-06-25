@@ -1,143 +1,378 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/Client" elementFormDefault="qualified" targetNamespace="http://www.example.org/Client">
-  	
+        	
 	
+  
+  
+  
   <complexType name="ClientFaultType">
-            
+                        
+    
+    
+    
     <sequence>
-                  
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="Code" type="string"/>
-                  
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="Description" type="string"/>
-              
+                                
+    
+    
+    
     </sequence>
-        
+                    
+  
+  
+  
   </complexType>
-      
+            
+  
+  
+  
   <complexType name="RegisterClientReqType">
-            
-    <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="Name" type="string"/>
-                  
-      <element maxOccurs="1" minOccurs="1" name="Email" type="string"/>
-                  
-      <element maxOccurs="1" minOccurs="1" name="PhoneNumber" type="string"/>
-              
-    </sequence>
-        
-  </complexType>
-      
+                        
     
+    
+    
+    <sequence>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="Name" type="string"/>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="Email" type="string"/>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="PhoneNumber" type="string"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+    
+  
+  
+  
   <complexType name="RegisterClientResType">
-            
+                        
+    
+    
+    
     <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
-              
-    </sequence>
-        
-  </complexType>
+                                    
       
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+  
+  
+  
   <complexType name="GetClientDetailsReqType">
-            
-    <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
-              
-    </sequence>
-        
-  </complexType>
-      
+                        
     
+    
+    
+    <sequence>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+    
+  
+  
+  
   <complexType name="GetClientDetailsResType">
-            
+                        
+    
+    
+    
     <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="Name" type="string"/>
-                  
-      <element maxOccurs="1" minOccurs="1" name="Email" type="string"/>
-                  
-      <element maxOccurs="1" minOccurs="1" name="PhoneNumber" type="string"/>
-              
-    </sequence>
-        
-  </complexType>
+                                    
       
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="Name" type="string"/>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="Email" type="string"/>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="PhoneNumber" type="string"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+  
+  
+  
   <complexType name="UpdateClientReqType">
-            
+                        
+    
+    
+    
     <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
-                  
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="0" name="ClientId" type="integer"/>
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="Name" type="string"/>
-                  
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="Email" type="string"/>
-                  
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="PhoneNumber" type="string"/>
-              
-    </sequence>
-        
-  </complexType>
-      
+                                
     
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+    
+  
+  
+  
   <complexType name="UpdateClientResType">
-            
-    <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="Result" type="boolean"/>
-              
-    </sequence>
-        
-  </complexType>
-      
-  <complexType name="RemoveClientReqType">
-            
-    <sequence>
-                  
-      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
-              
-    </sequence>
-        
-  </complexType>
-      
+                        
     
-  <complexType name="RemoveClientResType">
-            
+    
+    
     <sequence>
-                  
+                                    
+      
+      
+      
       <element maxOccurs="1" minOccurs="1" name="Result" type="boolean"/>
-              
+                                
+    
+    
+    
     </sequence>
-        
+                    
+  
+  
+  
   </complexType>
+            
+  
+  
+  
+  <complexType name="RemoveClientReqType">
+                        
+    
+    
+    
+    <sequence>
+                                    
       
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="ClientId" type="integer"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+    
+  
+  
+  
+  <complexType name="RemoveClientResType">
+                        
+    
+    
+    
+    <sequence>
+                                    
+      
+      
+      
+      <element maxOccurs="1" minOccurs="1" name="Result" type="boolean"/>
+                                
+    
+    
+    
+    </sequence>
+                    
+  
+  
+  
+  </complexType>
+            
+  
+  
+  
   <element name="ClientFault" type="tns:ClientFaultType"/>
-      
+            
+  
+  
+  
   <element name="RegisterClientRequest" type="tns:RegisterClientReqType"/>
-      
+            
+  
+  
+  
   <element name="RegisterClientResponse" type="tns:RegisterClientResType"/>
-      
+            
+  
+  
+  
   <element name="GetClientDetailsRequest" type="tns:GetClientDetailsReqType"/>
-      
+            
+  
+  
+  
   <element name="GetClientDetailsResponse" type="tns:GetClientDetailsResType"/>
-      
+            
+  
+  
+  
   <element name="UpdateClientRequest" type="tns:UpdateClientReqType"/>
-      
+            
+  
+  
+  
   <element name="UpdateClientResponse" type="tns:UpdateClientResType"/>
-      
+            
+  
+  
+  
   <element name="RemoveClientRequest" type="tns:RemoveClientReqType"/>
-      
+            
+  
+  
+  
   <element name="RemoveClientResponse" type="tns:RemoveClientResType"/>
-  	
+        	
 	
     
+  
+  
+  
   <complexType name="RegisterClientResponseArray">
+                
+    
+    
     <sequence>
+                        
+      
+      
       <element maxOccurs="unbounded" minOccurs="0" name="RegisterClientResponse" type="tns:RegisterClientResType"/>
+                      
+    
+    
+    </sequence>
+              
+  
+  
+  </complexType>
+            
+  
+  
+  
+  <element name="RegisterClientResponseArray" type="tns:RegisterClientResponseArray"/>
+        
+    
+  
+  
+  <complexType name="RegisterClientRequestArray">
+            
+    
+    <sequence>
+                  
+      
+      <element maxOccurs="unbounded" minOccurs="0" name="RegisterClientRequest" type="tns:RegisterClientReqType"/>
+                
+    
+    </sequence>
+          
+  
+  </complexType>
+          
+  
+  
+  <element name="RegisterClientRequestArray" type="tns:RegisterClientRequestArray"/>
+      
+
+    
+  <complexType name="UpdateClientRequestArray">
+    <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="UpdateClientRequest" type="tns:UpdateClientReqType"/>
     </sequence>
   </complexType>
       
-  <element name="RegisterClientResponseArray" type="tns:RegisterClientResponseArray"/>
+  <element name="UpdateClientRequestArray" type="tns:UpdateClientRequestArray"/>
   
 </schema>

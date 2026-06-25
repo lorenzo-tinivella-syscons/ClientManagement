@@ -4,6 +4,10 @@
     <sca:interface.wsdl xmi:id="_iDMiaGpLEfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
     <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_iDh5kGpLEfGJ2vSDNhgoTw" name="RestService" path="/clients" docBasePath="http://localhost:7777/ClientManagement.module" docResourcePath="ClientManagementREST" basePath="/" connector="clientmanagement.module.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json">
       <operation xmi:id="_iDqccGpLEfGJ2vSDNhgoTw" operationName="post" nickname="post-clients" httpMethod="POST" notes="postClientManagementREST" responseStyle="array" requestStyle="element" outputPartName="item">
+        <parameters xmi:id="_bHP08GrwEfG0rMEm6vxgNA">
+          <parameterMapping xmi:id="_cUqqUGrwEfG0rMEm6vxgNA" parameterName="ObjectID" parameterType="Header" dataType="string" required="true"/>
+        </parameters>
+        <responseStatus xmi:id="_dRdv8G-1EfGUj5xHUhL7mA" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
@@ -15,14 +19,23 @@
     <sca:interface.wsdl xmi:id="_KN7utmpREfGJ2vSDNhgoTw" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients1)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
     <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_KOAnMGpREfGJ2vSDNhgoTw" name="RestService1" path="/clients/{clientId}" docBasePath="http://localhost:7777/ClientManagement.module" docResourcePath="ClientManagementREST" basePath="/" connector="clientmanagement.module.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json">
       <operation xmi:id="_KOB1UGpREfGJ2vSDNhgoTw" operationName="get" nickname="get-clients" httpMethod="GET" notes="getClientManagementREST" responseStyle="element" outputPartName="item">
+        <parameters xmi:id="_2eqVMGr0EfGwcsVrS2a4qQ">
+          <parameterMapping xmi:id="_2eqVMWr0EfGwcsVrS2a4qQ" parameterName="ObjectID" parameterType="Header" dataType="string" required="true"/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
       <operation xmi:id="_KOB1UWpREfGJ2vSDNhgoTw" operationName="put" nickname="put-clients" httpMethod="PUT" notes="putClientManagementREST" responseStyle="element" requestStyle="element" outputPartName="item">
+        <parameters xmi:id="_8uQD8Gr0EfGwcsVrS2a4qQ">
+          <parameterMapping xmi:id="_8uQD8Wr0EfGwcsVrS2a4qQ" parameterName="ObjectID" parameterType="Header" dataType="string" required="true"/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
       <operation xmi:id="_KOB1UmpREfGJ2vSDNhgoTw" operationName="delete" nickname="delete-clients" httpMethod="DELETE" notes="deleteClientManagementREST" responseStyle="element" outputPartName="msg">
+        <parameters xmi:id="_sX4dAGr1EfGwcsVrS2a4qQ">
+          <parameterMapping xmi:id="_sX4dAWr1EfGwcsVrS2a4qQ" parameterName="ObjectID" parameterType="Header" dataType="string" required="true"/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>

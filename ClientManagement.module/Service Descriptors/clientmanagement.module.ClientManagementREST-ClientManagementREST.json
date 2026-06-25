@@ -22,6 +22,12 @@
           "description" : "",
           "type" : "string",
           "required" : true
+        }, {
+          "name" : "ObjectID",
+          "in" : "header",
+          "description" : "",
+          "type" : "string",
+          "required" : true
         } ],
         "responses" : {
           "200" : {
@@ -52,6 +58,12 @@
           "description" : "",
           "type" : "string",
           "required" : true
+        }, {
+          "name" : "ObjectID",
+          "in" : "header",
+          "description" : "",
+          "type" : "string",
+          "required" : true
         } ],
         "responses" : {
           "200" : {
@@ -71,6 +83,12 @@
         "parameters" : [ {
           "name" : "clientId",
           "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        }, {
+          "name" : "ObjectID",
+          "in" : "header",
           "description" : "",
           "type" : "string",
           "required" : true
@@ -100,6 +118,12 @@
             "$ref" : "#/definitions/RegisterClientRequest"
           },
           "required" : true
+        }, {
+          "name" : "ObjectID",
+          "in" : "header",
+          "description" : "",
+          "type" : "string",
+          "required" : true
         } ],
         "responses" : {
           "200" : {
@@ -110,6 +134,12 @@
                 "$ref" : "#/definitions/RegisterClientResponse",
                 "uniqueItems" : false
               }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
             }
           }
         }
@@ -153,7 +183,7 @@
     },
     "UpdateClientRequest" : {
       "type" : "object",
-      "required" : [ "Email", "ClientId", "PhoneNumber", "Name" ],
+      "required" : [ "Email", "PhoneNumber", "Name" ],
       "properties" : {
         "ClientId" : {
           "type" : "integer",
