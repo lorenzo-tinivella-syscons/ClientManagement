@@ -118,28 +118,12 @@
             "$ref" : "#/definitions/RegisterClientRequest"
           },
           "required" : true
-        }, {
-          "name" : "ObjectID",
-          "in" : "header",
-          "description" : "",
-          "type" : "string",
-          "required" : true
         } ],
         "responses" : {
           "200" : {
             "description" : "a RegisterClientResponse to be returned",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/RegisterClientResponse",
-                "uniqueItems" : false
-              }
-            }
-          },
-          "500" : {
-            "description" : "Internal Server Error",
-            "schema" : {
-              "type" : "string"
+              "$ref" : "#/definitions/RegisterClientResponse"
             }
           }
         }
@@ -157,6 +141,15 @@
         }
       }
     },
+    "UpdateClientResponse" : {
+      "type" : "object",
+      "required" : [ "Result" ],
+      "properties" : {
+        "Result" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "RegisterClientRequest" : {
       "type" : "object",
       "required" : [ "Email", "PhoneNumber", "Name" ],
@@ -169,15 +162,6 @@
         },
         "PhoneNumber" : {
           "type" : "string"
-        }
-      }
-    },
-    "UpdateClientResponse" : {
-      "type" : "object",
-      "required" : [ "Result" ],
-      "properties" : {
-        "Result" : {
-          "type" : "boolean"
         }
       }
     },

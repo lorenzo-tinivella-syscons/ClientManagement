@@ -267,14 +267,14 @@
             xmlns:tns="http://xmlns.example.com/20260617145326PLT"
             xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-            <plnk:partnerLinkType name="partnerLinkType">
-                <plnk:role name="use" portType="tns:clients"/>
-            </plnk:partnerLinkType>
             <plnk:partnerLinkType name="partnerLinkType1">
                 <plnk:role name="use" portType="ptyp:ClientManagementPortType"/>
             </plnk:partnerLinkType>
             <plnk:partnerLinkType name="partnerLinkType2">
                 <plnk:role name="use" portType="tns:clients1"/>
+            </plnk:partnerLinkType>
+            <plnk:partnerLinkType name="partnerLinkType">
+                <plnk:role name="use" portType="tns:clients2"/>
             </plnk:partnerLinkType>
             <wsdl:import namespace="http://www.example.org/Client"/>
             <wsdl:import namespace="http://tns.tibco.com/bw/REST"/>
@@ -290,7 +290,7 @@
                     name="parameters" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="postResponse">
-                <wsdl:part element="extns:RegisterClientResponseArray"
+                <wsdl:part element="extns:RegisterClientResponse"
                     name="item" tibex:hasMultipleNamespaces="false"/>
             </wsdl:message>
             <wsdl:message name="post4XXFaultMessage">
@@ -354,6 +354,38 @@
                     tibex:reasonPhrase="Internal Server Error"
                     tibex:statusCode="500" type="xsd:string"/>
             </wsdl:message>
+            <wsdl:message name="postRequest1">
+                <wsdl:part element="extns:RegisterClientRequest"
+                    name="item" tibex:hasMultipleNamespaces="false"/>
+                <wsdl:part element="extns1:httpHeaders"
+                    name="httpHeaders" tibex:source="bw.rest"/>
+            </wsdl:message>
+            <wsdl:message name="postResponse1">
+                <wsdl:part element="extns:RegisterClientResponse"
+                    name="item" tibex:hasMultipleNamespaces="false"/>
+            </wsdl:message>
+            <wsdl:message name="post4XXFaultMessage1">
+                <wsdl:part element="extns1:client4XXError" name="clientError"/>
+            </wsdl:message>
+            <wsdl:message name="post5XXFaultMessage1">
+                <wsdl:part element="extns1:server5XXError" name="serverError"/>
+            </wsdl:message>
+            <wsdl:message name="postRequest2">
+                <wsdl:part element="extns:RegisterClientRequest"
+                    name="item" tibex:hasMultipleNamespaces="false"/>
+                <wsdl:part element="extns1:httpHeaders"
+                    name="httpHeaders" tibex:source="bw.rest"/>
+            </wsdl:message>
+            <wsdl:message name="postResponse2">
+                <wsdl:part element="extns:RegisterClientResponse"
+                    name="item" tibex:hasMultipleNamespaces="false"/>
+            </wsdl:message>
+            <wsdl:message name="post4XXFaultMessage2">
+                <wsdl:part element="extns1:client4XXError" name="clientError"/>
+            </wsdl:message>
+            <wsdl:message name="post5XXFaultMessage2">
+                <wsdl:part element="extns1:server5XXError" name="serverError"/>
+            </wsdl:message>
             <wsdl:portType name="clients"
                 tibex:bw.rest.apipath="/clients"
                 tibex:bw.rest.basepath="ClientManagementREST"
@@ -395,6 +427,34 @@
                     <wsdl:output message="tns:deleteResponse" name="deleteOutput"/>
                     <wsdl:fault message="tns:delete4XXFaultMessage" name="clientFault"/>
                     <wsdl:fault message="tns:delete5XXFaultMessage" name="serverFault"/>
+                </wsdl:operation>
+            </wsdl:portType>
+            <wsdl:portType name="clientmanagementrest"
+                tibex:bw.rest.apipath="/clientmanagementrest"
+                tibex:bw.rest.basepath="ClientManagementREST"
+                tibex:bw.rest.resource="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json"
+                tibex:bw.rest.resource.source="generated" tibex:source="bw.rest.service">
+                <wsdl:documentation>ClientManagementREST service</wsdl:documentation>
+                <wsdl:operation name="post">
+                    <wsdl:documentation>postClientManagementREST</wsdl:documentation>
+                    <wsdl:input message="tns:postRequest1" name="postInput"/>
+                    <wsdl:output message="tns:postResponse1" name="postOutput"/>
+                    <wsdl:fault message="tns:post4XXFaultMessage1" name="clientFault"/>
+                    <wsdl:fault message="tns:post5XXFaultMessage1" name="serverFault"/>
+                </wsdl:operation>
+            </wsdl:portType>
+            <wsdl:portType name="clients2"
+                tibex:bw.rest.apipath="/clients"
+                tibex:bw.rest.basepath="ClientManagementREST"
+                tibex:bw.rest.resource="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json"
+                tibex:bw.rest.resource.source="generated" tibex:source="bw.rest.service">
+                <wsdl:documentation>ClientManagementREST service</wsdl:documentation>
+                <wsdl:operation name="post">
+                    <wsdl:documentation>postClientManagementREST</wsdl:documentation>
+                    <wsdl:input message="tns:postRequest2" name="postInput"/>
+                    <wsdl:output message="tns:postResponse2" name="postOutput"/>
+                    <wsdl:fault message="tns:post4XXFaultMessage2" name="clientFault"/>
+                    <wsdl:fault message="tns:post5XXFaultMessage2" name="serverFault"/>
                 </wsdl:operation>
             </wsdl:portType>
         </wsdl:definitions>
@@ -521,7 +581,6 @@
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     </children>
                                     <children type="3013">
                                     <children type="4018">
@@ -585,7 +644,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="269"
+                                    x="290"
                                     xsi:type="notation:Bounds" y="11"/>
                                     </children>
 
@@ -641,7 +700,7 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="115"
+                                    x="133"
                                     xsi:type="notation:Bounds" y="11"/>
                                     </children>
 
@@ -697,7 +756,7 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="-14"
+                                    x="-22"
                                     xsi:type="notation:Bounds" y="12"/>
                                     </children>
 
@@ -753,8 +812,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="421"
-                                    xsi:type="notation:Bounds" y="11"/>
+                                    x="395"
+                                    xsi:type="notation:Bounds" y="13"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -762,8 +821,6 @@
                                     <styles xsi:type="notation:SortingStyle"/>
 
                                     <styles xsi:type="notation:FilteringStyle"/>
-
-                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity"/>
                                     </children>
 
                                     <styles
@@ -780,8 +837,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity"/>
 
                                     <layoutConstraint
-                                    height="113"
-                                    width="557" xsi:type="notation:Bounds"/>
+                                    height="103"
+                                    width="536" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -800,7 +857,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity"/>
 
                                     <layoutConstraint
-                                    height="99"
+                                    height="102"
                                     width="560"
                                     x="15" xsi:type="notation:Bounds"/>
                                     </children>
@@ -838,7 +895,7 @@
 
                                     <children type="3007">
 
-                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Empty">
+                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
 
                                     <children type="4017">
 
@@ -890,11 +947,11 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="-11"
-                                    xsi:type="notation:Bounds" y="49"/>
+                                    x="329"
+                                    xsi:type="notation:Bounds" y="57"/>
                                     </children>
 
-                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
+                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Empty">
 
                                     <children type="4017">
 
@@ -946,8 +1003,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="299"
-                                    xsi:type="notation:Bounds" y="50"/>
+                                    x="6"
+                                    xsi:type="notation:Bounds" y="58"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -1010,11 +1067,10 @@
 
                                     <layoutConstraint
                                     height="200"
-                                    width="428" xsi:type="notation:Bounds"/>
+                                    width="484" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity"/>
                                     </children>
                                     <styles
                                     fontName="Segoe UI"
@@ -1024,12 +1080,11 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity"/>
 
                                     <layoutConstraint
-                                    height="335"
+                                    height="338"
                                     width="600" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     </children>
                                     <children type="3016">
                                     <children type="4002">
@@ -1075,21 +1130,23 @@
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     </children>
                                     <styles
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles
-                                    restoreHeight="154"
+                                    collapsed="true"
+                                    restoreHeight="360"
                                     restoreWidth="662"
-                                    restoreX="2" xsi:type="bwnotation:ResizingStyle"/>
+                                    restoreX="2"
+                                    restoreY="356" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     <layoutConstraint
-                                    height="354"
+                                    height="22"
                                     width="662"
-                                    x="2" xsi:type="notation:Bounds"/>
+                                    x="2"
+                                    xsi:type="notation:Bounds" y="356"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -1199,8 +1256,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="290"
-                                    xsi:type="notation:Bounds" y="11"/>
+                                    x="287"
+                                    xsi:type="notation:Bounds" y="28"/>
                                     </children>
 
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Invoke">
@@ -1255,8 +1312,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="133"
-                                    xsi:type="notation:Bounds" y="11"/>
+                                    x="137"
+                                    xsi:type="notation:Bounds" y="28"/>
                                     </children>
 
                                     <children type="4002 bw.generalactivities.log">
@@ -1311,8 +1368,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="-22"
-                                    xsi:type="notation:Bounds" y="12"/>
+                                    x="-26"
+                                    xsi:type="notation:Bounds" y="29"/>
                                     </children>
 
                                     <children type="4002 bw.generalactivities.log">
@@ -1367,8 +1424,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="395"
-                                    xsi:type="notation:Bounds" y="13"/>
+                                    x="409"
+                                    xsi:type="notation:Bounds" y="29"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -1392,8 +1449,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity"/>
 
                                     <layoutConstraint
-                                    height="103"
-                                    width="536" xsi:type="notation:Bounds"/>
+                                    height="114"
+                                    width="550" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -1412,7 +1469,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity"/>
 
                                     <layoutConstraint
-                                    height="102"
+                                    height="114"
                                     width="560"
                                     x="15" xsi:type="notation:Bounds"/>
                                     </children>
@@ -1450,7 +1507,7 @@
 
                                     <children type="3007">
 
-                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
+                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Empty">
 
                                     <children type="4017">
 
@@ -1502,11 +1559,11 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="329"
-                                    xsi:type="notation:Bounds" y="57"/>
+                                    x="3"
+                                    xsi:type="notation:Bounds" y="60"/>
                                     </children>
 
-                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Empty">
+                                    <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
 
                                     <children type="4017">
 
@@ -1558,8 +1615,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="6"
-                                    xsi:type="notation:Bounds" y="58"/>
+                                    x="309"
+                                    xsi:type="notation:Bounds" y="61"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -1622,7 +1679,7 @@
 
                                     <layoutConstraint
                                     height="200"
-                                    width="484" xsi:type="notation:Bounds"/>
+                                    width="498" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -1635,7 +1692,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity"/>
 
                                     <layoutConstraint
-                                    height="338"
+                                    height="350"
                                     width="600" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -1690,13 +1747,18 @@
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
-                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <styles
+                                    collapsed="true"
+                                    restoreHeight="373"
+                                    restoreWidth="662"
+                                    restoreX="2"
+                                    restoreY="715" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1"/>
                                     <layoutConstraint
-                                    height="357"
+                                    height="22"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="354"/>
+                                    xsi:type="notation:Bounds" y="377"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -1806,8 +1868,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="287"
-                                    xsi:type="notation:Bounds" y="28"/>
+                                    x="256"
+                                    xsi:type="notation:Bounds" y="11"/>
                                     </children>
 
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Invoke">
@@ -1862,8 +1924,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="137"
-                                    xsi:type="notation:Bounds" y="28"/>
+                                    x="122"
+                                    xsi:type="notation:Bounds" y="11"/>
                                     </children>
 
                                     <children type="4002 bw.generalactivities.log">
@@ -1918,8 +1980,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="-26"
-                                    xsi:type="notation:Bounds" y="29"/>
+                                    x="384"
+                                    xsi:type="notation:Bounds" y="12"/>
                                     </children>
 
                                     <children type="4002 bw.generalactivities.log">
@@ -1974,8 +2036,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="409"
-                                    xsi:type="notation:Bounds" y="29"/>
+                                    x="-25"
+                                    xsi:type="notation:Bounds" y="13"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -1999,8 +2061,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity"/>
 
                                     <layoutConstraint
-                                    height="114"
-                                    width="550" xsi:type="notation:Bounds"/>
+                                    height="101"
+                                    width="557" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -2019,7 +2081,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity"/>
 
                                     <layoutConstraint
-                                    height="114"
+                                    height="83"
                                     width="560"
                                     x="15" xsi:type="notation:Bounds"/>
                                     </children>
@@ -2109,8 +2171,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="3"
-                                    xsi:type="notation:Bounds" y="60"/>
+                                    x="-6"
+                                    xsi:type="notation:Bounds" y="48"/>
                                     </children>
 
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
@@ -2165,8 +2227,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="309"
-                                    xsi:type="notation:Bounds" y="61"/>
+                                    x="323"
+                                    xsi:type="notation:Bounds" y="49"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -2229,7 +2291,7 @@
 
                                     <layoutConstraint
                                     height="200"
-                                    width="498" xsi:type="notation:Bounds"/>
+                                    width="505" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -2242,7 +2304,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity"/>
 
                                     <layoutConstraint
-                                    height="350"
+                                    height="319"
                                     width="600" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -2297,13 +2359,18 @@
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
-                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <styles
+                                    collapsed="true"
+                                    restoreHeight="342"
+                                    restoreWidth="662"
+                                    restoreX="2"
+                                    restoreY="398" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2"/>
                                     <layoutConstraint
-                                    height="369"
+                                    height="22"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="712"/>
+                                    xsi:type="notation:Bounds" y="398"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -2363,7 +2430,7 @@
 
                                     <children type="3007">
 
-                                    <children type="4002">
+                                    <children type="4002 bw.generalactivities.log">
 
                                     <children type="4017">
 
@@ -2413,8 +2480,10 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="256"
-                                    xsi:type="notation:Bounds" y="11"/>
+                                    height="40"
+                                    width="40"
+                                    x="-11"
+                                    xsi:type="notation:Bounds" y="1"/>
                                     </children>
 
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Invoke">
@@ -2469,8 +2538,7 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="122"
-                                    xsi:type="notation:Bounds" y="11"/>
+                                    x="118" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <children type="4002 bw.generalactivities.log">
@@ -2525,11 +2593,10 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="384"
-                                    xsi:type="notation:Bounds" y="12"/>
+                                    x="424" xsi:type="notation:Bounds"/>
                                     </children>
 
-                                    <children type="4002 bw.generalactivities.log">
+                                    <children type="4002">
 
                                     <children type="4017">
 
@@ -2579,10 +2646,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@activities.5"/>
 
                                     <layoutConstraint
-                                    height="40"
-                                    width="40"
-                                    x="-25"
-                                    xsi:type="notation:Bounds" y="13"/>
+                                    x="276" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -2606,7 +2670,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity"/>
 
                                     <layoutConstraint
-                                    height="101"
+                                    height="155"
                                     width="557" xsi:type="notation:Bounds"/>
                                     </children>
 
@@ -2626,7 +2690,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity"/>
 
                                     <layoutConstraint
-                                    height="83"
+                                    height="115"
                                     width="560"
                                     x="15" xsi:type="notation:Bounds"/>
                                     </children>
@@ -2716,8 +2780,7 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="-6"
-                                    xsi:type="notation:Bounds" y="48"/>
+                                    xsi:type="notation:Bounds" y="36"/>
                                     </children>
 
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Reply">
@@ -2772,8 +2835,8 @@
                                     <layoutConstraint
                                     height="40"
                                     width="40"
-                                    x="323"
-                                    xsi:type="notation:Bounds" y="49"/>
+                                    x="310"
+                                    xsi:type="notation:Bounds" y="37"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -2796,9 +2859,7 @@
 
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@faultHandlers/@catchAll/@activity/@activity"/>
 
-                                    <layoutConstraint
-                                    height="168"
-                                    width="479" xsi:type="notation:Bounds"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -2835,8 +2896,10 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@faultHandlers"/>
 
                                     <layoutConstraint
-                                    height="200"
-                                    width="505" xsi:type="notation:Bounds"/>
+                                    height="185"
+                                    width="540"
+                                    x="21"
+                                    xsi:type="notation:Bounds" y="155"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -2849,7 +2912,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity"/>
 
                                     <layoutConstraint
-                                    height="319"
+                                    height="341"
                                     width="600" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -2904,17 +2967,13 @@
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
-                                    <styles
-                                    restoreHeight="70"
-                                    restoreWidth="662"
-                                    restoreX="2"
-                                    restoreY="451" xsi:type="bwnotation:ResizingStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.3"/>
                                     <layoutConstraint
-                                    height="338"
+                                    height="360"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="1083"/>
+                                    xsi:type="notation:Bounds" y="429"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -2926,8 +2985,7 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0"/>
                                     <layoutConstraint
-                                    height="1454"
-                                    width="681" xsi:type="notation:Bounds"/>
+                                    height="454" width="681" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -2941,7 +2999,7 @@
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity"/>
-                                    <layoutConstraint height="1464"
+                                    <layoutConstraint height="1643"
                                     width="691" xsi:type="notation:Bounds"/>
                                 </children>
                                 <styles xsi:type="notation:SortingStyle"/>
@@ -2970,10 +3028,21 @@
             </children>
             <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
             <element href="//0/@process"/>
-            <layoutConstraint height="1540" width="1036" xsi:type="notation:Bounds"/>
+            <layoutConstraint height="1719" width="1036" xsi:type="notation:Bounds"/>
         </children>
         <styles xsi:type="notation:DiagramStyle"/>
         <element href="//0"/>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
             target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0" type="4006">
@@ -2997,15 +3066,16 @@
             <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
         <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0" type="4006">
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+            <bendpoints points="[25, -1, -110, 0]$[111, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.0,0.5918367346938775)" xsi:type="notation:IdentityAnchor"/>
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
@@ -3015,92 +3085,9 @@
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, -1, -110, 0]$[111, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.0,0.5918367346938775)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@links/@children.1"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.1"/>
             <bendpoints points="[25, -1, -130, 0]$[131, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
             <targetAnchor id="(0.08163265306122448,0.5510204081632653)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@links/@children.2"/>
-            <bendpoints points="[25, 2, -80, 0]$[81, 0, -24, -2]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.061224489795918366,0.5102040816326531)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity/@links/@children.1"/>
-            <bendpoints points="[25, -1, -138, 0]$[139, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.0,0.5714285714285714)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity/@links/@children.2"/>
-            <bendpoints points="[25, 1, -97, 0]$[98, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.0,0.5306122448979592)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@links/@children.1"/>
-            <bendpoints points="[25, -2, -122, 0]$[123, 0, -24, 2]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.24489795918367346,0.5510204081632653)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@links/@children.2"/>
-            <bendpoints points="[25, 1, -103, 0]$[104, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
-            <targetAnchor id="(0.0,0.4489795918367347)" xsi:type="notation:IdentityAnchor"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.1"/>
-            <bendpoints points="[25, 0, -129, 0]$[130, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
@@ -3111,40 +3098,56 @@
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.2"/>
-            <bendpoints points="[25, 0, -127, 0]$[128, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+            <bendpoints points="[25, 2, -80, 0]$[81, 0, -24, -2]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.061224489795918366,0.5102040816326531)" xsi:type="notation:IdentityAnchor"/>
         </edges>
         <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1" type="4006">
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, 1, -285, 0]$[286, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, -1, -138, 0]$[139, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.0,0.5714285714285714)" xsi:type="notation:IdentityAnchor"/>
         </edges>
         <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0" type="4006">
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, -1, -298, 0]$[299, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@links/@children.2"/>
+            <bendpoints points="[25, 1, -97, 0]$[98, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.0,0.5306122448979592)" xsi:type="notation:IdentityAnchor"/>
         </edges>
         <edges
-            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
-            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1" type="4006">
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, 1, -281, 0]$[282, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, -2, -122, 0]$[123, 0, -24, 2]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.24489795918367346,0.5510204081632653)" xsi:type="notation:IdentityAnchor"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@activity/@links/@children.2"/>
+            <bendpoints points="[25, 1, -103, 0]$[104, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.0,0.4489795918367347)" xsi:type="notation:IdentityAnchor"/>
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
@@ -3155,7 +3158,62 @@
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, 1, -285, 0]$[286, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, -1, -298, 0]$[299, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, 1, -281, 0]$[282, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.2/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.2/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
             <bendpoints points="[25, 1, -304, 0]$[305, 0, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, 0, -133, 0]$[134, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.3/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.3/@activity/@activity/@links/@children.2"/>
+            <bendpoints points="[25, 0, -123, 0]$[124, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
     </notation:Diagram>
     <tibex:NamespaceRegistry enabled="true">
@@ -3183,8 +3241,6 @@
     <bpws:import importType="http://schemas.xmlsoap.org/wsdl/"
         location="../../../../CommonDataStructures/Service%20Descriptors/ClientManagementDescriptor.wsdl" namespace="http://www.tibco.com/ClientManagementDescriptor/"/>
     <bpws:partnerLinks>
-        <bpws:partnerLink myRole="use" name="clients"
-            partnerLinkType="ns:partnerLinkType" sca-bpel:ignore="false" sca-bpel:service="clients"/>
         <bpws:partnerLink name="ClientManagementSOAP"
             partnerLinkType="ns:partnerLinkType1" partnerRole="use"
             sca-bpel:ignore="true"
@@ -3193,9 +3249,11 @@
                 processConfigurationName=""
                 processName="clientmanagement.operation.ClientManagementSOAP" serviceName="ClientManagementPortType"/>
         </bpws:partnerLink>
-        <bpws:partnerLink myRole="use" name="clients1"
+        <bpws:partnerLink myRole="use" name="clients-id"
             partnerLinkType="ns:partnerLinkType2"
-            sca-bpel:ignore="false" sca-bpel:service="clients1"/>
+            sca-bpel:ignore="false" sca-bpel:service="clients-id"/>
+        <bpws:partnerLink myRole="use" name="clients"
+            partnerLinkType="ns:partnerLinkType" sca-bpel:ignore="false" sca-bpel:service="clients"/>
     </bpws:partnerLinks>
     <bpws:variables>
         <bpws:variable element="ns0:ProcessContext"
@@ -3267,6 +3325,14 @@
             name="Reply_puError-input" sca-bpel:internal="true"/>
         <bpws:variable messageType="ns:delete5XXFaultMessage"
             name="Reply_deleteError-input" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns:postRequest1" name="post1" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns:postResponse1"
+            name="postOut1-input" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns:postRequest2" name="post2" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns:postResponse2"
+            name="postOut1-input1" sca-bpel:internal="true"/>
+        <bpws:variable name="FaultName4" sca-bpel:internal="true" type="xsd:string"/>
+        <bpws:variable element="ns0:FaultDetail" name="FaultDetails4" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -3280,187 +3346,7 @@
         <bpws:flow name="flow">
             <bpws:links/>
             <bpws:pick createInstance="yes" name="pick" tibex:xpdlId="c3885a64-9cec-4229-802a-0a0ded312ff9">
-                <bpws:onMessage operation="post" partnerLink="clients"
-                    portType="ns:clients"
-                    tibex:xpdlId="5a5dd43a-6230-4e16-8432-c1d6315c9239" variable="post">
-                    <bpws:scope name="scope1">
-                        <bpws:faultHandlers>
-                            <bpws:catchAll
-                                tibex:faultDetailsVar="FaultDetails"
-                                tibex:faultNameVar="FaultName" tibex:xpdlId="5152cbe3-d636-455f-9ea3-8d6d58632bec">
-                                <bpws:scope name="scope5">
-                                    <bpws:flow name="flow5">
-                                    <bpws:links>
-                                    <bpws:link
-                                    name="EmptyToReply" tibex:linkType="SUCCESS"/>
-                                    </bpws:links>
-                                    <bpws:empty name="Empty" tibex:xpdlId="e2486c2a-7241-49ed-854a-8d69c7402384">
-                                    <bpws:sources>
-                                    <bpws:source linkName="EmptyToReply"/>
-                                    </bpws:sources>
-                                    </bpws:empty>
-                                    <bpws:reply
-                                    faultName="serverFault"
-                                    name="Reply_postError"
-                                    operation="post"
-                                    partnerLink="clients"
-                                    portType="ns:clients"
-                                    tibex:xpdlId="cb657d15-00ea-49a3-b50f-020b3f25baf8" variable="Reply_postError-input">
-                                    <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns2="http://xmlns.example.com/20260617145326PLT" xmlns:tns6="http://tns.tibco.com/bw/REST" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0"&gt;&lt;xsl:param name="_error"/&gt;&lt;xsl:template name="Reply_postError-input" match="/"&gt;&lt;tns2:post5XXFaultMessage&gt;&lt;serverError&gt;&lt;tns6:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="xsd:integer($_error/MsgCode)"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="$_error/Msg"/&gt;&lt;/message&gt;&lt;/tns6:server5XXError&gt;&lt;/serverError&gt;&lt;/tns2:post5XXFaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
-                                    <tibex:inputBindings>
-                                    <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260617145326PLT&quot; xmlns:tns6=&quot;http://tns.tibco.com/bw/REST&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;_error&quot;/>&#xa;    &lt;xsl:template name=&quot;Reply_postError-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns6:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;xsd:integer($_error/MsgCode)&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;$_error/Msg&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns6:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                                    </tibex:inputBindings>
-                                    <bpws:targets>
-                                    <bpws:target linkName="EmptyToReply"/>
-                                    </bpws:targets>
-                                    </bpws:reply>
-                                    </bpws:flow>
-                                </bpws:scope>
-                            </bpws:catchAll>
-                        </bpws:faultHandlers>
-                        <bpws:flow name="flow1">
-                            <bpws:links>
-                                <bpws:link
-                                    name="LogToInvoke_RegisterClient" tibex:linkType="SUCCESS"/>
-                                <bpws:link
-                                    name="Invoke_RegisterClientTopostOut" tibex:linkType="SUCCESS"/>
-                                <bpws:link
-                                    name="postOutToLog_RegisterClientResponse" tibex:linkType="SUCCESS"/>
-                            </bpws:links>
-                            <bpws:empty name="OnMessageStart"
-                                tibex:constructor="onMessageStart" tibex:xpdlId="ace601d3-d26b-45ae-8213-aeff21bafa6e"/>
-                            <bpws:empty name="OnMessageEnd"
-                                tibex:constructor="onMessageEnd" tibex:xpdlId="0dcc97ba-2d8c-4c82-8e04-3c588f77ffb0"/>
-                            <bpws:reply name="postOut" operation="post"
-                                partnerLink="clients"
-                                portType="ns:clients"
-                                tibex:xpdlId="d64a7a4f-e696-4ffc-aaf5-403ef54fcde6" variable="postOut-input">
-                                <tibex:inputBindings>
-                                    <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260617145326PLT&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Invoke_RegisterClient.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;postOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:RegisterClientResponseArray>&#xa;            &lt;tns:RegisterClientResponse>&#xa;                &lt;tns:ClientId>&#xa;                    &lt;xsl:value-of select=&quot;$Invoke_RegisterClient.parameters/tns:ClientId&quot;/>&#xa;                &lt;/tns:ClientId>&#xa;            &lt;/tns:RegisterClientResponse>&#xa;        &lt;/tns:RegisterClientResponseArray>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                                </tibex:inputBindings>
-                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns2="http://xmlns.example.com/20260617145326PLT" xmlns:tns="http://www.example.org/Client" version="2.0"&gt;
-    &lt;xsl:param name="Invoke_RegisterClient"/&gt;
-    &lt;xsl:template name="postOut-input" match="/"&gt;
-        &lt;tns2:postResponse&gt;
-            &lt;item&gt;
-                &lt;tns:RegisterClientResponseArray&gt;
-                    &lt;tns:RegisterClientResponse&gt;
-                        &lt;tns:ClientId&gt;
-                            &lt;xsl:value-of select="$Invoke_RegisterClient/parameters/tns:RegisterClientResponse/tns:ClientId"/&gt;
-                        &lt;/tns:ClientId&gt;
-                    &lt;/tns:RegisterClientResponse&gt;
-                &lt;/tns:RegisterClientResponseArray&gt;
-            &lt;/item&gt;
-        &lt;/tns2:postResponse&gt;
-    &lt;/xsl:template&gt;
-&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
-                                <bpws:targets>
-                                    <bpws:target linkName="Invoke_RegisterClientTopostOut"/>
-                                </bpws:targets>
-                                <bpws:sources>
-                                    <bpws:source linkName="postOutToLog_RegisterClientResponse"/>
-                                </bpws:sources>
-                                <bpws:correlations/>
-                            </bpws:reply>
-                            <bpws:invoke
-                                inputVariable="Invoke_RegisterClient-input"
-                                name="Invoke_RegisterClient"
-                                operation="RegisterClient"
-                                outputVariable="Invoke_RegisterClient"
-                                partnerLink="ClientManagementSOAP"
-                                portType="ns1:ClientManagementPortType" tibex:xpdlId="87d78888-f886-4743-8438-70f25ed42dad">
-                                <tibex:inputBindings>
-                                    <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:tns1=&quot;http://www.tibco.com/ClientManagementDescriptor/&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post.item&quot;/>&#xa;    &lt;xsl:template name=&quot;Invoke_RegisterClient-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:RegisterClientRequest>&#xa;            &lt;tns:Name>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns:Name&quot;/>&#xa;            &lt;/tns:Name>&#xa;            &lt;tns:Email>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns:Email&quot;/>&#xa;            &lt;/tns:Email>&#xa;            &lt;tns:PhoneNumber>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns:PhoneNumber&quot;/>&#xa;            &lt;/tns:PhoneNumber>&#xa;        &lt;/tns:RegisterClientRequest>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                                </tibex:inputBindings>
-                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://www.example.org/Client" xmlns:tns1="http://www.tibco.com/ClientManagementDescriptor/" version="2.0"&gt;&lt;xsl:param name="post"/&gt;&lt;xsl:template name="Invoke_RegisterClient-input" match="/"&gt;&lt;tns1:RegisterClientRequest&gt;&lt;parameters&gt;&lt;tns:RegisterClientRequest&gt;&lt;tns:Name&gt;&lt;xsl:value-of select="$post/item/tns:RegisterClientRequest/tns:Name"/&gt;&lt;/tns:Name&gt;&lt;tns:Email&gt;&lt;xsl:value-of select="$post/item/tns:RegisterClientRequest/tns:Email"/&gt;&lt;/tns:Email&gt;&lt;tns:PhoneNumber&gt;&lt;xsl:value-of select="$post/item/tns:RegisterClientRequest/tns:PhoneNumber"/&gt;&lt;/tns:PhoneNumber&gt;&lt;/tns:RegisterClientRequest&gt;&lt;/parameters&gt;&lt;/tns1:RegisterClientRequest&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
-                                <bpws:targets>
-                                    <bpws:target linkName="LogToInvoke_RegisterClient"/>
-                                </bpws:targets>
-                                <bpws:sources>
-                                    <bpws:source linkName="Invoke_RegisterClientTopostOut"/>
-                                </bpws:sources>
-                                <bpws:correlations/>
-                            </bpws:invoke>
-                            <bpws:extensionActivity>
-                                <tibex:activityExtension
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;post&quot;/>&lt;xsl:template name=&quot;Log_RegisterClientRequest-input&quot; match=&quot;/&quot;>&lt;tns3:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot;REST Request: &amp;quot;, tib:render-xml($post/item/tns:RegisterClientRequest), &amp;quot; --- ObjectID: &amp;quot;, $post/httpHeaders/tns4:clientsPostHeader/ObjectID)&quot;/>&lt;/message>&lt;/tns3:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
-                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
-                                    inputVariable="Log_RegisterClientRequest-input"
-                                    name="Log_RegisterClientRequest"
-                                    tibex:xpdlId="0161f723-b36f-40eb-96de-80ffc40fc3d4" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                                    <bpws:sources>
-                                    <bpws:source linkName="LogToInvoke_RegisterClient"/>
-                                    </bpws:sources>
-                                    <tibex:inputBindings>
-                                    <tibex:inputBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post.item&quot;/>&#xa;    &lt;xsl:param name=&quot;post.httpHeaders&quot;/>&#xa;    &lt;xsl:template name=&quot;Log_RegisterClientRequest-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:ActivityInput>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;concat(&amp;quot;REST Request: &amp;quot;, tib:render-xml($post.item), &amp;quot; --- ObjectID: &amp;quot;, $post.httpHeaders/ObjectID)&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                                    </tibex:inputBindings>
-                                    <tibex:config>
-                                    <bwext:BWActivity
-                                    activityTypeID="bw.generalactivities.log"
-                                    version="6.0.0.001"
-                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
-                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
-                                    xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                    <activityConfig>
-                                    <properties
-                                    name="config" xsi:type="activityconfig:EMFProperty">
-                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
-                                    <value
-                                    controlBy="Application"
-                                    role="Info"
-                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
-                                    </properties>
-                                    </activityConfig>
-                                    </bwext:BWActivity>
-                                    </tibex:config>
-                                </tibex:activityExtension>
-                            </bpws:extensionActivity>
-                            <bpws:extensionActivity>
-                                <tibex:activityExtension
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;post&quot;/>&lt;xsl:param name=&quot;Invoke_RegisterClient&quot;/>&lt;xsl:template name=&quot;Log_RegisterClientResponse-input&quot; match=&quot;/&quot;>&lt;tns3:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot;REST Response: &amp;quot;, tib:render-xml($Invoke_RegisterClient/parameters/tns:RegisterClientResponse/tns:ClientId), &amp;quot; --- ObjectID: &amp;quot;, $post/httpHeaders/tns4:clientsPostHeader/ObjectID)&quot;/>&lt;/message>&lt;/tns3:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
-                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
-                                    inputVariable="Log_RegisterClientResponse-input"
-                                    name="Log_RegisterClientResponse"
-                                    tibex:xpdlId="91033af4-abbc-4538-aae0-80685be7ed4e" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                                    <bpws:targets>
-                                    <bpws:target linkName="postOutToLog_RegisterClientResponse"/>
-                                    </bpws:targets>
-                                    <tibex:inputBindings>
-                                    <tibex:inputBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Invoke_RegisterClient.parameters&quot;/>&#xa;    &lt;xsl:param name=&quot;post.httpHeaders&quot;/>&#xa;    &lt;xsl:template name=&quot;Log_RegisterClientResponse-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:ActivityInput>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;concat(&amp;quot;REST Response: &amp;quot;, tib:render-xml($Invoke_RegisterClient.parameters/tns:ClientId), &amp;quot; --- ObjectID: &amp;quot;, $post.httpHeaders/ObjectID)&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                                    </tibex:inputBindings>
-                                    <tibex:config>
-                                    <bwext:BWActivity
-                                    activityTypeID="bw.generalactivities.log"
-                                    version="6.0.0.001"
-                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
-                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
-                                    xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                    <activityConfig>
-                                    <properties
-                                    name="config" xsi:type="activityconfig:EMFProperty">
-                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
-                                    <value
-                                    controlBy="Application"
-                                    role="Info"
-                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
-                                    </properties>
-                                    </activityConfig>
-                                    </bwext:BWActivity>
-                                    </tibex:config>
-                                </tibex:activityExtension>
-                            </bpws:extensionActivity>
-                        </bpws:flow>
-                    </bpws:scope>
-                </bpws:onMessage>
-                <bpws:onMessage operation="get" partnerLink="clients1"
+                <bpws:onMessage operation="get" partnerLink="clients-id"
                     portType="ns:clients1"
                     tibex:xpdlId="71a08aa6-70f5-471b-8b68-40169957a116" variable="get">
                     <bpws:scope name="scope2">
@@ -3478,7 +3364,7 @@
                                     faultName="serverFault"
                                     name="Reply_getError"
                                     operation="get"
-                                    partnerLink="clients1"
+                                    partnerLink="clients-id"
                                     portType="ns:clients1"
                                     tibex:xpdlId="00360004-250a-4055-bca2-cf0419cfa427" variable="Reply_getError-input">
                                     <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -3512,7 +3398,7 @@
                             <bpws:empty name="OnMessageEnd1"
                                 tibex:constructor="onMessageEnd" tibex:xpdlId="b72742e1-6df1-4845-b7da-6f0f8d5ed663"/>
                             <bpws:reply name="getOut" operation="get"
-                                partnerLink="clients1"
+                                partnerLink="clients-id"
                                 portType="ns:clients1"
                                 tibex:xpdlId="bcd5e544-d2e1-4a56-83b9-c77dc6835b41" variable="getOut-input">
                                 <tibex:inputBindings>
@@ -3635,7 +3521,7 @@
                         </bpws:flow>
                     </bpws:scope>
                 </bpws:onMessage>
-                <bpws:onMessage operation="put" partnerLink="clients1"
+                <bpws:onMessage operation="put" partnerLink="clients-id"
                     portType="ns:clients1"
                     tibex:xpdlId="ddb9295c-0ce2-44d5-94a7-87fcd1fa8eec" variable="put">
                     <bpws:scope name="scope3">
@@ -3658,7 +3544,7 @@
                                     faultName="serverFault"
                                     name="Reply_puError"
                                     operation="put"
-                                    partnerLink="clients1"
+                                    partnerLink="clients-id"
                                     portType="ns:clients1"
                                     tibex:xpdlId="168f0a7b-1c33-4467-9a68-626df4cf06b6" variable="Reply_puError-input">
                                     <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -3687,7 +3573,7 @@
                             <bpws:empty name="OnMessageEnd2"
                                 tibex:constructor="onMessageEnd" tibex:xpdlId="e9394d53-c20c-48d7-b165-a3776af575fa"/>
                             <bpws:reply name="putOut" operation="put"
-                                partnerLink="clients1"
+                                partnerLink="clients-id"
                                 portType="ns:clients1"
                                 tibex:xpdlId="d20ccb10-4f88-47f7-845c-76404fc323a0" variable="putOut-input">
                                 <tibex:inputBindings>
@@ -3798,7 +3684,7 @@
                     </bpws:scope>
                 </bpws:onMessage>
                 <bpws:onMessage operation="delete"
-                    partnerLink="clients1" portType="ns:clients1"
+                    partnerLink="clients-id" portType="ns:clients1"
                     tibex:xpdlId="2e9ed492-03f8-4cb1-b1b5-23d9038f1452" variable="delete">
                     <bpws:scope name="scope4">
                         <bpws:faultHandlers>
@@ -3820,7 +3706,7 @@
                                     faultName="serverFault"
                                     name="Reply_deleteError"
                                     operation="delete"
-                                    partnerLink="clients1"
+                                    partnerLink="clients-id"
                                     portType="ns:clients1"
                                     tibex:xpdlId="0557f029-6e08-48d1-aeaf-c1e42e8042ef" variable="Reply_deleteError-input">
                                     <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -3850,7 +3736,7 @@
                                 tibex:constructor="onMessageEnd" tibex:xpdlId="36178a89-d960-41f9-a813-103072aae2c2"/>
                             <bpws:reply name="deleteOut"
                                 operation="delete"
-                                partnerLink="clients1"
+                                partnerLink="clients-id"
                                 portType="ns:clients1"
                                 tibex:xpdlId="3c0faeef-aecf-46cf-959c-f7d6a2f55156" variable="deleteOut-input">
                                 <tibex:inputBindings>
@@ -3970,6 +3856,171 @@
                                     </tibex:config>
                                 </tibex:activityExtension>
                             </bpws:extensionActivity>
+                        </bpws:flow>
+                    </bpws:scope>
+                </bpws:onMessage>
+                <bpws:onMessage operation="post" partnerLink="clients"
+                    portType="ns:clients2"
+                    tibex:xpdlId="9b8649a0-c8c5-4d3d-b519-721881aea7cb" variable="post2">
+                    <bpws:scope name="scope9">
+                        <bpws:faultHandlers>
+                            <bpws:catchAll
+                                tibex:faultDetailsVar="FaultDetails4"
+                                tibex:faultNameVar="FaultName4" tibex:xpdlId="9396b6ed-9e27-452a-ba6b-ddbb479b7a9f">
+                                <bpws:scope name="scope10">
+                                    <bpws:flow name="flow10">
+                                    <bpws:links>
+                                    <bpws:link
+                                    name="EmptyToReply" tibex:linkType="SUCCESS"/>
+                                    </bpws:links>
+                                    <bpws:empty name="Empty" tibex:xpdlId="e2486c2a-7241-49ed-854a-8d69c7402384">
+                                    <bpws:sources>
+                                    <bpws:source linkName="EmptyToReply"/>
+                                    </bpws:sources>
+                                    </bpws:empty>
+                                    <bpws:reply
+                                    faultName="serverFault"
+                                    name="Reply_postError"
+                                    operation="post"
+                                    partnerLink="clients"
+                                    portType="ns:clients"
+                                    tibex:xpdlId="cb657d15-00ea-49a3-b50f-020b3f25baf8" variable="Reply_postError-input">
+                                    <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns2="http://xmlns.example.com/20260617145326PLT" xmlns:tns6="http://tns.tibco.com/bw/REST" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0"&gt;&lt;xsl:param name="_error"/&gt;&lt;xsl:template name="Reply_postError-input" match="/"&gt;&lt;tns2:post5XXFaultMessage&gt;&lt;serverError&gt;&lt;tns6:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="xsd:integer($_error/MsgCode)"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="$_error/Msg"/&gt;&lt;/message&gt;&lt;/tns6:server5XXError&gt;&lt;/serverError&gt;&lt;/tns2:post5XXFaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+                                    <tibex:inputBindings>
+                                    <tibex:partBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260617145326PLT&quot; xmlns:tns6=&quot;http://tns.tibco.com/bw/REST&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;_error&quot;/>&#xa;    &lt;xsl:template name=&quot;Reply_postError-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns6:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;xsd:integer($_error/MsgCode)&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;$_error/Msg&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns6:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
+                                    <bpws:targets>
+                                    <bpws:target linkName="EmptyToReply"/>
+                                    </bpws:targets>
+                                    <bpws:correlations/>
+                                    </bpws:reply>
+                                    </bpws:flow>
+                                </bpws:scope>
+                            </bpws:catchAll>
+                        </bpws:faultHandlers>
+                        <bpws:flow name="flow9">
+                            <bpws:links>
+                                <bpws:link
+                                    name="LogToInvoke_RegisterClient" tibex:linkType="SUCCESS"/>
+                                <bpws:link
+                                    name="Invoke_RegisterClientTopostOut1" tibex:linkType="SUCCESS"/>
+                                <bpws:link
+                                    name="postOut1ToLog_RegisterClientResponse" tibex:linkType="SUCCESS"/>
+                            </bpws:links>
+                            <bpws:empty name="OnMessageStart4"
+                                tibex:constructor="onMessageStart" tibex:xpdlId="8b8dc371-a424-4498-8fa7-5b3e893aaac6"/>
+                            <bpws:empty name="OnMessageEnd4"
+                                tibex:constructor="onMessageEnd" tibex:xpdlId="038d0928-02e6-4799-9643-fe698fa72585"/>
+                            <bpws:extensionActivity>
+                                <tibex:activityExtension
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;post2&quot;/>&lt;xsl:template name=&quot;Log_RegisterClientRequest-input&quot; match=&quot;/&quot;>&lt;tns3:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot;REST Request: &amp;quot;, tib:render-xml($post2/item/tns:RegisterClientRequest), &amp;quot; --- ObjectID: &amp;quot;, &amp;quot;elemento&amp;quot;)&quot;/>&lt;/message>&lt;/tns3:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                                    inputVariable="Log_RegisterClientRequest-input"
+                                    name="Log_RegisterClientRequest"
+                                    tibex:xpdlId="0161f723-b36f-40eb-96de-80ffc40fc3d4" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:sources>
+                                    <bpws:source linkName="LogToInvoke_RegisterClient"/>
+                                    </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post2.item&quot;/>&#xa;    &lt;xsl:template name=&quot;Log_RegisterClientRequest-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:ActivityInput>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;concat(&amp;quot;REST Request: &amp;quot;, tib:render-xml($post2.item), &amp;quot; --- ObjectID: &amp;quot;, &amp;quot;elemento&amp;quot;)&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
+                                    <tibex:config>
+                                    <bwext:BWActivity
+                                    activityTypeID="bw.generalactivities.log"
+                                    version="6.0.0.001"
+                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                                    xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <activityConfig>
+                                    <properties
+                                    name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                                    <value
+                                    controlBy="Application"
+                                    role="Info"
+                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
+                                    </properties>
+                                    </activityConfig>
+                                    </bwext:BWActivity>
+                                    </tibex:config>
+                                </tibex:activityExtension>
+                            </bpws:extensionActivity>
+                            <bpws:invoke
+                                inputVariable="Invoke_RegisterClient-input"
+                                name="Invoke_RegisterClient"
+                                operation="RegisterClient"
+                                outputVariable="Invoke_RegisterClient"
+                                partnerLink="ClientManagementSOAP"
+                                portType="ns1:ClientManagementPortType" tibex:xpdlId="87d78888-f886-4743-8438-70f25ed42dad">
+                                <tibex:inputBindings>
+                                    <tibex:partBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:tns1=&quot;http://www.tibco.com/ClientManagementDescriptor/&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post2.item&quot;/>&#xa;    &lt;xsl:template name=&quot;Invoke_RegisterClient-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:RegisterClientRequest>&#xa;            &lt;tns:Name>&#xa;                &lt;xsl:value-of select=&quot;$post2.item/tns:Name&quot;/>&#xa;            &lt;/tns:Name>&#xa;            &lt;tns:Email>&#xa;                &lt;xsl:value-of select=&quot;$post2.item/tns:Email&quot;/>&#xa;            &lt;/tns:Email>&#xa;            &lt;tns:PhoneNumber>&#xa;                &lt;xsl:value-of select=&quot;$post2.item/tns:PhoneNumber&quot;/>&#xa;            &lt;/tns:PhoneNumber>&#xa;        &lt;/tns:RegisterClientRequest>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                </tibex:inputBindings>
+                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://www.example.org/Client" xmlns:tns1="http://www.tibco.com/ClientManagementDescriptor/" version="2.0"&gt;&lt;xsl:param name="post2"/&gt;&lt;xsl:template name="Invoke_RegisterClient-input" match="/"&gt;&lt;tns1:RegisterClientRequest&gt;&lt;parameters&gt;&lt;tns:RegisterClientRequest&gt;&lt;tns:Name&gt;&lt;xsl:value-of select="$post2/item/tns:RegisterClientRequest/tns:Name"/&gt;&lt;/tns:Name&gt;&lt;tns:Email&gt;&lt;xsl:value-of select="$post2/item/tns:RegisterClientRequest/tns:Email"/&gt;&lt;/tns:Email&gt;&lt;tns:PhoneNumber&gt;&lt;xsl:value-of select="$post2/item/tns:RegisterClientRequest/tns:PhoneNumber"/&gt;&lt;/tns:PhoneNumber&gt;&lt;/tns:RegisterClientRequest&gt;&lt;/parameters&gt;&lt;/tns1:RegisterClientRequest&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+                                <bpws:targets>
+                                    <bpws:target linkName="LogToInvoke_RegisterClient"/>
+                                </bpws:targets>
+                                <bpws:sources>
+                                    <bpws:source linkName="Invoke_RegisterClientTopostOut1"/>
+                                </bpws:sources>
+                                <bpws:correlations/>
+                            </bpws:invoke>
+                            <bpws:extensionActivity>
+                                <tibex:activityExtension
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Invoke_RegisterClient&quot;/>&lt;xsl:template name=&quot;Log_RegisterClientResponse-input&quot; match=&quot;/&quot;>&lt;tns3:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot;REST Response: &amp;quot;, tib:render-xml($Invoke_RegisterClient/parameters/tns:RegisterClientResponse/tns:ClientId), &amp;quot; --- ObjectID: &amp;quot;, &amp;quot;oggetto&amp;quot;)&quot;/>&lt;/message>&lt;/tns3:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                                    inputVariable="Log_RegisterClientResponse-input"
+                                    name="Log_RegisterClientResponse"
+                                    tibex:xpdlId="91033af4-abbc-4538-aae0-80685be7ed4e" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:targets>
+                                    <bpws:target linkName="postOut1ToLog_RegisterClientResponse"/>
+                                    </bpws:targets>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tns4=&quot;http://xmlns.example.com/ClientManagementREST/headerParameters&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Invoke_RegisterClient.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;Log_RegisterClientResponse-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:ActivityInput>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;concat(&amp;quot;REST Response: &amp;quot;, tib:render-xml($Invoke_RegisterClient.parameters/tns:ClientId), &amp;quot; --- ObjectID: &amp;quot;, &amp;quot;oggetto&amp;quot;)&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
+                                    <tibex:config>
+                                    <bwext:BWActivity
+                                    activityTypeID="bw.generalactivities.log"
+                                    version="6.0.0.001"
+                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                                    xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <activityConfig>
+                                    <properties
+                                    name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                                    <value
+                                    controlBy="Application"
+                                    role="Info"
+                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
+                                    </properties>
+                                    </activityConfig>
+                                    </bwext:BWActivity>
+                                    </tibex:config>
+                                </tibex:activityExtension>
+                            </bpws:extensionActivity>
+                            <bpws:reply name="postOut1" operation="post"
+                                partnerLink="clients"
+                                portType="ns:clients2"
+                                tibex:xpdlId="87e4d161-4bbe-499a-969b-3bfa1d752985" variable="postOut1-input1">
+                                <tibex:inputBindings>
+                                    <tibex:partBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260617145326PLT&quot; xmlns:tns=&quot;http://www.example.org/Client&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Invoke_RegisterClient.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;postOut1-input1&quot; match=&quot;/&quot;>&#xa;        &lt;tns:RegisterClientResponse>&#xa;            &lt;tns:ClientId>&#xa;                &lt;xsl:value-of select=&quot;$Invoke_RegisterClient.parameters/tns:ClientId&quot;/>&#xa;            &lt;/tns:ClientId>&#xa;        &lt;/tns:RegisterClientResponse>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                </tibex:inputBindings>
+                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns2="http://xmlns.example.com/20260617145326PLT" xmlns:tns="http://www.example.org/Client" version="2.0"&gt;&lt;xsl:param name="Invoke_RegisterClient"/&gt;&lt;xsl:template name="postOut1-input1" match="/"&gt;&lt;tns2:postResponse2&gt;&lt;item&gt;&lt;tns:RegisterClientResponse&gt;&lt;tns:ClientId&gt;&lt;xsl:value-of select="$Invoke_RegisterClient/parameters/tns:RegisterClientResponse/tns:ClientId"/&gt;&lt;/tns:ClientId&gt;&lt;/tns:RegisterClientResponse&gt;&lt;/item&gt;&lt;/tns2:postResponse2&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+                                <bpws:targets>
+                                    <bpws:target linkName="Invoke_RegisterClientTopostOut1"/>
+                                </bpws:targets>
+                                <bpws:sources>
+                                    <bpws:source linkName="postOut1ToLog_RegisterClientResponse"/>
+                                </bpws:sources>
+                            </bpws:reply>
                         </bpws:flow>
                     </bpws:scope>
                 </bpws:onMessage>

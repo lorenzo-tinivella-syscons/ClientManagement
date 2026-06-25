@@ -9,10 +9,88 @@
     xmlns:ns0="http://xmlns.example.com/20260617111708PLT"
     xmlns:ns1="http://www.tibco.com/ClientManagementDescriptor/"
     xmlns:ns2="http://www.example.org/Client"
+    xmlns:ns3="http://tns.tibco.com/bw/palette/internal/activityerror+8aec2a90-f4cb-468b-aa6f-4ba0d1fece42"
+    xmlns:ns4="http://tns.tibco.com/bw/palette/internal/activityerror+2197b8e0-8015-470a-9d80-14fcc4ab6bb2"
+    xmlns:ns5="http://tns.tibco.com/bw/palette/internal/activityerror+4d4f003d-ccfd-4aef-8949-3019f37441cc"
+    xmlns:ns6="http://tns.tibco.com/bw/palette/internal/activityerror+2f624d2a-aaa8-47b3-a7a9-96e498eedeb7"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
     xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:VariableDescriptor type="MemorySaving">
+        <task name="RegisterClientOut">
+            <endingVariables>
+                <variable>RegisterClientOut-input</variable>
+                <variable>CallProcess_RegisterClient</variable>
+            </endingVariables>
+        </task>
+        <task name="CallProcess_RegisterClient">
+            <endingVariables>
+                <variable>CallProcess_RegisterClient-input</variable>
+                <variable>RegisterClient</variable>
+            </endingVariables>
+        </task>
+        <task name="Reply_registerClientError">
+            <endingVariables>
+                <variable>Reply_registerClientError-input</variable>
+                <variable>FaultDetails</variable>
+            </endingVariables>
+        </task>
+        <task name="GetClientDetailsOut">
+            <endingVariables>
+                <variable>GetClientDetailsOut-input</variable>
+                <variable>CallProcess_RetrieveClientInfo</variable>
+            </endingVariables>
+        </task>
+        <task name="CallProcess_RetrieveClientInfo">
+            <endingVariables>
+                <variable>CallProcess_RetrieveClientInfo-input</variable>
+                <variable>GetClientDetails</variable>
+            </endingVariables>
+        </task>
+        <task name="Reply_getClientDetailsError">
+            <endingVariables>
+                <variable>Reply_getClientDetailsError-input</variable>
+                <variable>FaultDetails1</variable>
+            </endingVariables>
+        </task>
+        <task name="UpdateClientOut">
+            <endingVariables>
+                <variable>UpdateClientOut-input</variable>
+                <variable>CallProcess_EditClientInfo</variable>
+            </endingVariables>
+        </task>
+        <task name="CallProcess_EditClientInfo">
+            <endingVariables>
+                <variable>CallProcess_EditClientInfo-input</variable>
+                <variable>UpdateClient</variable>
+            </endingVariables>
+        </task>
+        <task name="Reply_updateClientError">
+            <endingVariables>
+                <variable>Reply_updateClientError-input</variable>
+                <variable>FaultDetails2</variable>
+            </endingVariables>
+        </task>
+        <task name="RemoveClientOut">
+            <endingVariables>
+                <variable>RemoveClientOut-input</variable>
+                <variable>CallProcess_ClientDeletion</variable>
+            </endingVariables>
+        </task>
+        <task name="CallProcess_ClientDeletion">
+            <endingVariables>
+                <variable>CallProcess_ClientDeletion-input</variable>
+                <variable>RemoveClient</variable>
+            </endingVariables>
+        </task>
+        <task name="ReplyremoveClientError">
+            <endingVariables>
+                <variable>ReplyremoveClientError-input</variable>
+                <variable>FaultDetails3</variable>
+            </endingVariables>
+        </task>
+    </tibex:VariableDescriptor>
     <tibex:Types>
         <xs:schema attributeFormDefault="unqualified"
             elementFormDefault="qualified"
@@ -173,6 +251,54 @@
                 </complexContent>
             </complexType>
             <element name="DuplicateKeyException" type="tns:DuplicateKeyExceptionType"/>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+8aec2a90-f4cb-468b-aa6f-4ba0d1fece42"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://www.example.org/Client" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+8aec2a90-f4cb-468b-aa6f-4ba0d1fece42">
+            <import namespace="http://www.example.org/Client"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:ClientFault"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+2197b8e0-8015-470a-9d80-14fcc4ab6bb2"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://www.example.org/Client" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+2197b8e0-8015-470a-9d80-14fcc4ab6bb2">
+            <import namespace="http://www.example.org/Client"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:ClientFault"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+4d4f003d-ccfd-4aef-8949-3019f37441cc"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://www.example.org/Client" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+4d4f003d-ccfd-4aef-8949-3019f37441cc">
+            <import namespace="http://www.example.org/Client"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:ClientFault"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+2f624d2a-aaa8-47b3-a7a9-96e498eedeb7"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://www.example.org/Client" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+2f624d2a-aaa8-47b3-a7a9-96e498eedeb7">
+            <import namespace="http://www.example.org/Client"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:ClientFault"/>
+                </choice>
+            </complexType>
         </schema>
         <wsdl:definitions
             targetNamespace="http://xmlns.example.com/20260617111708PLT"
@@ -2729,6 +2855,15 @@
             name="Reply_updateClientError-input" sca-bpel:internal="true"/>
         <bpws:variable messageType="ns1:ClientFault"
             name="ReplyremoveClientError-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns3:ActivityErrorData"
+            name="_error_CallProcess_RegisterClient" sca-bpel:internal="true"/>
+        <bpws:variable element="ns:ErrorReport" name="_error" sca-bpel:internal="true"/>
+        <bpws:variable element="ns4:ActivityErrorData"
+            name="_error_CallProcess_RetrieveClientInfo" sca-bpel:internal="true"/>
+        <bpws:variable element="ns5:ActivityErrorData"
+            name="_error_CallProcess_EditClientInfo" sca-bpel:internal="true"/>
+        <bpws:variable element="ns6:ActivityErrorData"
+            name="_error_CallProcess_ClientDeletion" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>

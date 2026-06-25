@@ -10,10 +10,24 @@
     xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/jdbc"
     xmlns:ns2="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jdbc.update"
     xmlns:ns3="http://www.example.org/Client"
+    xmlns:ns4="http://tns.tibco.com/bw/palette/internal/activityerror+bw.internal.end"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
     xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:VariableDescriptor type="MemorySaving">
+        <task name="End">
+            <endingVariables>
+                <variable>JDBCUpdate</variable>
+            </endingVariables>
+        </task>
+        <task name="JDBCUpdate">
+            <endingVariables>
+                <variable>JDBCUpdate-input</variable>
+                <variable>Start</variable>
+            </endingVariables>
+        </task>
+    </tibex:VariableDescriptor>
     <tibex:Types>
         <xs:schema attributeFormDefault="unqualified"
             elementFormDefault="qualified"
@@ -365,6 +379,18 @@
                 </choice>
             </complexType>
         </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.internal.end"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://www.example.org/Client" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.internal.end">
+            <import namespace="http://www.example.org/Client"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:ClientFault"/>
+                </choice>
+            </complexType>
+        </schema>
     </tibex:Types>
     <tibex:ProcessInfo callable="true" createdBy="admin.tinivella"
         createdOn="Wed Jun 17 11:49:13 CEST 2026" description=""
@@ -603,6 +629,7 @@
             sca-bpel:internal="true" tibex:parameter="in"/>
         <bpws:variable element="ns3:RemoveClientResponse"
             name="End-input" sca-bpel:internal="true" tibex:parameter="out"/>
+        <bpws:variable element="ns4:ActivityErrorData" name="_error_End" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
