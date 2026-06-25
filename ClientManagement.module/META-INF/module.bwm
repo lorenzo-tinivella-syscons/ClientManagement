@@ -35,6 +35,9 @@
     <sca:interface.wsdl xmi:id="_E_2ewHB8EfGvW-slDxtU1A" interface="http://xmlns.example.com/20260617145326PLT#wsdl.interface(clients2)" scaext:wsdlLocation="../Processes/clientmanagement/module/ClientManagementREST.bwp"/>
     <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_E_5iEHB8EfGvW-slDxtU1A" name="RestService" path="/clients" docBasePath="http://localhost:7777/ClientManagement.module" docResourcePath="ClientManagementREST" basePath="/" connector="clientmanagement.module.HTTPConnectorResource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/clientmanagement.module.ClientManagementREST-ClientManagementREST.json">
       <operation xmi:id="_E_7XQHB8EfGvW-slDxtU1A" operationName="post" nickname="post-clients" httpMethod="POST" notes="postClientManagementREST" responseStyle="element" requestStyle="element" outputPartName="item">
+        <parameters xmi:id="_igLq8HCOEfGiW84mcjk8tQ">
+          <parameterMapping xmi:id="_igLq8XCOEfGiW84mcjk8tQ" parameterName="ObjectID" parameterType="Header" dataType="string" required="true"/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
