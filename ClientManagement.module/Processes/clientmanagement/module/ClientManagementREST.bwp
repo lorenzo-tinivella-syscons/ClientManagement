@@ -373,7 +373,7 @@
             <wsdl:message name="postRequest2">
                 <wsdl:part element="extns:RegisterClientRequest"
                     name="item" tibex:hasMultipleNamespaces="false"/>
-                <wsdl:part element="extns1:httpHeaders"
+                <wsdl:part element="extns3:clients2PostHeader"
                     name="httpHeaders" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="postResponse2">
@@ -382,9 +382,13 @@
             </wsdl:message>
             <wsdl:message name="post4XXFaultMessage2">
                 <wsdl:part element="extns1:client4XXError" name="clientError"/>
+                <wsdl:part element="extns3:clients2PostResponseHeader"
+                    name="httpFaultHeaders" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="post5XXFaultMessage2">
                 <wsdl:part element="extns1:server5XXError" name="serverError"/>
+                <wsdl:part element="extns3:clients2PostResponseHeader"
+                    name="httpFaultHeaders" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:portType name="clients"
                 tibex:bw.rest.apipath="/clients"
@@ -1136,17 +1140,15 @@
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles
-                                    collapsed="true"
                                     restoreHeight="360"
                                     restoreWidth="662"
                                     restoreX="2"
                                     restoreY="356" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     <layoutConstraint
-                                    height="22"
+                                    height="360"
                                     width="662"
-                                    x="2"
-                                    xsi:type="notation:Bounds" y="356"/>
+                                    x="2" xsi:type="notation:Bounds"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -1748,17 +1750,16 @@
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles
-                                    collapsed="true"
                                     restoreHeight="373"
                                     restoreWidth="662"
                                     restoreX="2"
                                     restoreY="715" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1"/>
                                     <layoutConstraint
-                                    height="22"
+                                    height="373"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="377"/>
+                                    xsi:type="notation:Bounds" y="359"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -2360,17 +2361,16 @@
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles
-                                    collapsed="true"
                                     restoreHeight="342"
                                     restoreWidth="662"
                                     restoreX="2"
                                     restoreY="398" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2"/>
                                     <layoutConstraint
-                                    height="22"
+                                    height="343"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="398"/>
+                                    xsi:type="notation:Bounds" y="731"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -2973,7 +2973,7 @@
                                     height="360"
                                     width="662"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="429"/>
+                                    xsi:type="notation:Bounds" y="1073"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -2985,7 +2985,8 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0"/>
                                     <layoutConstraint
-                                    height="454" width="681" xsi:type="notation:Bounds"/>
+                                    height="1463"
+                                    width="681" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>

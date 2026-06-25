@@ -5,7 +5,7 @@
     "title" : "ClientManagementREST",
     "description" : "ClientManagementREST service"
   },
-  "host" : "localhost:8080",
+  "host" : "",
   "basePath" : "/",
   "schemes" : [ "http" ],
   "paths" : {
